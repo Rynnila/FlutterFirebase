@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "997299042643",
+    "project_id": "banco-de-dados-251fe",
+    "storage_bucket": "banco-de-dados-251fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997299042643:android:379c467a7c807ddb8d09a6",
+        "android_client_info": {
+          "package_name": "br.com.paulofelix.flutter_firebase_teste"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "997299042643-hib8inuthrqkm33roc8gj87nb8imlqhr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFvT9SxEvBghQbKIrUsg8YCPf_hvvMCwI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "997299042643-hib8inuthrqkm33roc8gj87nb8imlqhr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
