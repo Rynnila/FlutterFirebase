@@ -18,6 +18,7 @@ class _AlterarExcluirState extends State<AlterarExcluir> {
   TextEditingController Telefone = TextEditingController();
   TextEditingController CPF = TextEditingController();
   TextEditingController Email = TextEditingController();
+  TextEditingController Endereco = TextEditingController();
 
   @override
   void initState() {
@@ -25,6 +26,7 @@ class _AlterarExcluirState extends State<AlterarExcluir> {
     Telefone = TextEditingController(text: widget.docid.get('Telefone'));
     CPF = TextEditingController(text: widget.docid.get('CPF'));
     Email = TextEditingController(text: widget.docid.get('Email'));
+    Endereco = TextEditingController(text: widget.docid.get('Endereço'));
     super.initState();
   }
 
@@ -40,6 +42,7 @@ class _AlterarExcluirState extends State<AlterarExcluir> {
                 'Telefone': Telefone.text,
                 'CPF': CPF.text,
                 'Email': Email.text,
+                'Endereço':Endereco.text,
               }).whenComplete(() => Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (_) => Home())));
             },
@@ -80,9 +83,16 @@ class _AlterarExcluirState extends State<AlterarExcluir> {
                 decoration: InputDecoration(hintText: 'Email'),
               ),
             ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+                child: TextField(
+                controller: Endereco,
+                decoration: InputDecoration(hintText: 'Endereço'),
+              ),
+            ),
             Expanded(
                 child: Container(
-              child: TextField(
+                child: TextField(
                 controller: Telefone,
                 expands: true,
                 maxLines: null,

@@ -10,6 +10,7 @@ class Adicionar extends StatelessWidget {
   TextEditingController Telefone = TextEditingController();
   TextEditingController CPF = TextEditingController();
   TextEditingController Email = TextEditingController();
+  TextEditingController Endereco = TextEditingController();
 
   CollectionReference ref = FirebaseFirestore.instance.collection("Alunos");
 
@@ -25,6 +26,7 @@ class Adicionar extends StatelessWidget {
                 'CPF': CPF.text,
                 'Email': Email.text,
                 'Telefone': Telefone.text,
+                'Endereço': Endereco.text,
               }).whenComplete(() => 
               Navigator.pushReplacement(context, 
               MaterialPageRoute(builder: (_)=> Home())));
@@ -55,6 +57,13 @@ class Adicionar extends StatelessWidget {
               child: TextField(
                 controller: Telefone,
                 decoration: InputDecoration(hintText: 'Telefone'),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              child: TextField(
+                controller: Endereco,
+                decoration: InputDecoration(hintText: 'Endereço'),
               ),
             ),
             Expanded(
