@@ -7,12 +7,14 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_firebase_teste/adicionar.dart';
 import 'package:flutter_firebase_teste/alterarexcluir.dart';
 import 'package:flutter_firebase_teste/firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-void main(List<String> args) async {
+Future <void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
   runApp(Home());
 }
 
