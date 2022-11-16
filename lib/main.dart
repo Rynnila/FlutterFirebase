@@ -8,84 +8,126 @@ import 'package:flutter_firebase_teste/adicionar.dart';
 import 'package:flutter_firebase_teste/alterarexcluir.dart';
 import 'package:flutter_firebase_teste/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'home.dart';
 
-Future <void> main(List<String> args) async {
+Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
-  runApp(Home());
+  runApp(LoginPage());
 }
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(brightness: Brightness.dark),
-      title: "BD Firebase",
-      home: NewHome(),
-    );
-  }
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class NewHome extends StatefulWidget {
-  const NewHome({Key? key}) : super(key: key);
+class _LoginPageState extends State<LoginPage> {
+  String email = '';
+  String password = '';
 
-  @override
-  State<NewHome> createState() => _NewHomeState();
-}
-
-class _NewHomeState extends State<NewHome> {
-  final Stream<QuerySnapshot> userStream =
-      FirebaseFirestore.instance.collection("Alunos").snapshots();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => Adicionar())),
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
+      body: SingleChildScrollView(
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.width,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        border: Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.circular(12)),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: TextField(
+                        onChanged: (text) {
+                          email = text;
+                        },
+                        //keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          hintText: 'Email',
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        border: Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.circular(12)),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: TextField(
+                        onChanged: (text) {
+                          password = text;
+                        },
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          hintText: 'Password',
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      if (email == "alinny@gmail.com" &&
+                              password == "alydograu" ||
+                          email == "felipe@gmail.com" &&
+                              password == "fefedograu") {
+                        Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (context) => Home()));
+                      } else {
+                        print('erro');
+                      }
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(18),
+                      decoration: BoxDecoration(
+                          color: Colors.deepPurple,
+                          borderRadius: BorderRadius.circular(12)),
+                      child: Center(
+                        child: Text(
+                          'Sign in',
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 0, 0, 0),
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
-      appBar: AppBar(title: Text("Alunos")),
-      body: StreamBuilder(
-          stream: userStream,
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasError) {
-              return Text("erro");
-            }
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            return Container(
-              child: ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (_, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => AlterarExcluir(
-                                    docid: snapshot.data!.docs[index])));
-                      },
-                      child: ListTile(
-                        title:
-                            Text(snapshot.data!.docChanges[index].doc['Nome']),
-                      ),
-                    );
-                  }),
-            );
-          }),
     );
   }
 }

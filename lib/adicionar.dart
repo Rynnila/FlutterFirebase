@@ -5,6 +5,8 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_firebase_teste/main.dart';
 
+import 'home.dart';
+
 class Adicionar extends StatelessWidget {
   TextEditingController Nome = TextEditingController();
   TextEditingController Telefone = TextEditingController();

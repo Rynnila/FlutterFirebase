@@ -5,6 +5,8 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_firebase_teste/main.dart';
 
+import 'home.dart';
+
 class AlterarExcluir extends StatefulWidget {
   DocumentSnapshot docid;
   AlterarExcluir({required this.docid});
@@ -50,7 +52,7 @@ class _AlterarExcluirState extends State<AlterarExcluir> {
           ),
                     MaterialButton(
             onPressed: () {
-              widget.docid.reference.delete().whenComplete(() => 
+             widget.docid.reference.delete().whenComplete(() => 
               Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (_) => Home())));
             },
